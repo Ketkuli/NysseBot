@@ -1,0 +1,2 @@
+# NysseBot
+ Nyssebotin harjoittelu
