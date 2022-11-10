@@ -1,5 +1,5 @@
 # NysseBot
-TG bot for fetching timetables from Nysse
+Telegram bot for fetching timetables from Nysse through API for a predetermined bus stop
 
 You should add new .env - file for API-key 
 
