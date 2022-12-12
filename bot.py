@@ -14,6 +14,8 @@ from telegram.ext import (
   Updater,
 )
 
+from datetime import datetime
+
 # Loads .env file to environ, after that we can read the variables from .env
 load_dotenv()
 
@@ -60,7 +62,16 @@ def get_schedule(update: Update, context: CallbackContext):
   received = response.json()
   timetable = received['body']
 
-  msg = f"Seuraavat bussit ovat:\n{timetable['2519'][0]['lineRef']}: {timetable['2519'][0]['call']['aimedArrivalTime']}\n{timetable['2519'][1]['lineRef']}: {timetable['2519'][1]['call']['aimedArrivalTime']}"
+
+  first_bus_line = timetable['2519'][0]['lineRef']
+  first_arrival = datetime.fromisoformat(timetable['2519'][0]['call']['expectedArrivalTime'])
+  second_bus_line = timetable['2519'][1]['lineRef']
+  second_arrival = datetime.fromisoformat(timetable['2519'][1]['call']['expectedArrivalTime'])
+
+
+  msg = f"Seuraavat bussit ovat:\
+    \nLinja {first_bus_line}: {first_arrival.strftime('%H.%M')}\
+    \nLinja {second_bus_line}: {second_arrival.strftime('%H.%M')}"
   update.message.reply_text(msg)
 
   # No argument?
