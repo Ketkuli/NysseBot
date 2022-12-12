@@ -61,15 +61,16 @@ def get_schedule(update: Update, context: CallbackContext):
   response = requests.get("http://data.itsfactory.fi/journeys/api/1/stop-monitoring?stops=2519")
   received = response.json()
   timetable = received['body']
+  busstop = '2519' # Change this to your own bus stop number
 
 
-  first_bus_line = timetable['2519'][0]['lineRef']
-  first_arrival = datetime.fromisoformat(timetable['2519'][0]['call']['expectedArrivalTime'])
-  second_bus_line = timetable['2519'][1]['lineRef']
-  second_arrival = datetime.fromisoformat(timetable['2519'][1]['call']['expectedArrivalTime'])
+  first_bus_line = timetable[busstop][0]['lineRef']
+  first_arrival = datetime.fromisoformat(timetable[busstop][0]['call']['expectedArrivalTime'])
+  second_bus_line = timetable[busstop][1]['lineRef']
+  second_arrival = datetime.fromisoformat(timetable[busstop][1]['call']['expectedArrivalTime'])
 
 
-  msg = f"Seuraavat bussit ovat:\
+  msg = f"Seuraavien bussien arvioidut saapumisajat ovat:\
     \nLinja {first_bus_line}: {first_arrival.strftime('%H.%M')}\
     \nLinja {second_bus_line}: {second_arrival.strftime('%H.%M')}"
   update.message.reply_text(msg)
