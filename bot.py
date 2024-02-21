@@ -71,8 +71,8 @@ def get_schedule(update: Update, context: CallbackContext):
 
 
   msg = f"Seuraavien bussien arvioidut saapumisajat ovat:\
-    \nLinja {first_bus_line}: {first_arrival.strftime('%H.%M')}\
-    \nLinja {second_bus_line}: {second_arrival.strftime('%H.%M')}"
+    \nLinja {first_bus_line:>2}: {first_arrival.strftime('%H.%M')}\
+    \nLinja {second_bus_line:>2}: {second_arrival.strftime('%H.%M')}"
   update.message.reply_text(msg)
 
   # No argument?
